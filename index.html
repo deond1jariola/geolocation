@@ -19,12 +19,10 @@
 
     <script>
         function initMap() {
-            // Создаем карту с центром на текущем местоположении пользователя
             navigator.geolocation.getCurrentPosition(position => {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
 
-                // Выводим широту и долготу на странице
                 document.getElementById('location').innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
 
                 const mapOptions = {
@@ -34,7 +32,6 @@
 
                 const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-                // Добавляем маркер на карте
                 const marker = new google.maps.Marker({
                     position: { lat: latitude, lng: longitude },
                     map: map,
@@ -46,9 +43,8 @@
         }
     </script>
 
-    <!-- Подключаем Google Maps API -->
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=ВАШ_API_КЛЮЧ&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=Your_API_KEY&callback=initMap">
     </script>
 </body>
 </html>
