@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Map</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Location Map</h1>
+    
+    <div id="map"></div>
+    <p id="location"></p>
+
+    <script>
+        function initMap() {
+            // Создаем карту с центром на текущем местоположении пользователя
+            navigator.geolocation.getCurrentPosition(position => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Выводим широту и долготу на странице
+                document.getElementById('location').innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+
+                const mapOptions = {
+                    center: { lat: latitude, lng: longitude },
+                    zoom: 15
+                };
+
+                const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                // Добавляем маркер на карте
+                const marker = new google.maps.Marker({
+                    position: { lat: latitude, lng: longitude },
+                    map: map,
+                    title: 'My Location'
+                });
+            }, error => {
+                console.error('Error getting geolocation:', error);
+            });
+        }
+    </script>
+
+    <!-- Подключаем Google Maps API -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=ВАШ_API_КЛЮЧ&callback=initMap">
+    </script>
+</body>
+</html>
